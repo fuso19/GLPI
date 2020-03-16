@@ -6,20 +6,6 @@ from selenium.webdriver.common.keys import Keys
 import time
 import pyautogui
 
-'''
-b.find_element_by_xpath("//select[@name='element_name']/option[text()='option_text']").click()
-
-select = Select(driver.find_element_by_id('fruits01'))
-
-# select by visible text
-select.select_by_visible_text('Banana')
-
-# select by value
-select.select_by_value('1')
-
-browser.find_element_by_xpath('//button[text()="Outliers"]')
-'''
-
 
 class Botglpi:
     def __init__(self, username, password):
@@ -31,7 +17,7 @@ class Botglpi:
 
     def Login(self):
         glpi = self.glpi
-        glpi.get('https://glpi.atelecom.com.br/')
+        glpi.get('GLPI_URL')
         time.sleep(5)  # deixar a pagina carregar
 
         c_username = glpi.find_element_by_xpath(
@@ -49,7 +35,7 @@ class Botglpi:
     def Chamado_Ativos(self):
         glpi = self.glpi
         # abre chamado
-        glpi.get('https://glpi.atelecom.com.br/front/ticket.form.php?id=19631')
+        glpi.get('TICKET_URL')
         time.sleep(2)
 
         # processando chamado
@@ -64,12 +50,12 @@ class Botglpi:
         # escreve Acompanhamento Ativos
         pyautogui.click(559, 555, button='left')
         time.sleep(2)
-        pyautogui.typewrite('Ativos')
+        pyautogui.typewrite('DESCRIPTION')
         time.sleep(1)
         # Adicionar tarefa
         glpi.find_element_by_xpath('//input[@type="submit]"').click()
 
 
-ativos = Botglpi('pedro.damasceno', '50c$candyshop')
+ativos = Botglpi('LOGIN_ID', 'PASSWORD')
 ativos.Login()
 ativos.Chamado_Ativos()
